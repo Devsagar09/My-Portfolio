@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevPortfolio | Next Gen</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <!-- Remix Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
 
@@ -140,6 +138,12 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1000; /* Ensure it stays on top of the menu */
+            transition: 0.3s;
+        }
+
+        .menu-toggle:hover {
+            color: var(--primary);
         }
 
         /* --- HERO SECTION --- */
@@ -283,10 +287,8 @@
         .string { color: #22c55e; }
         .keyword { color: var(--primary); }
 
-        /* --- SKILLS SECTION --- */
-        #skills { padding: 6rem 0; }
-
-        #extraskills { padding: 3rem 0; }
+        /* --- SKILLS & TOOLS SECTIONS --- */
+        #skills, #extraskills, #resume { padding: 4rem 0; }
 
         .skills-grid {
             display: grid;
@@ -335,6 +337,130 @@
         .node-icon { color: #339933; }
         .db-icon { color: #4db33d; }
 
+        /* --- RESUME SECTION --- */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .resume-column h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resume-column h3 i { color: var(--primary); }
+
+        .timeline-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary); /* Colored accent line */
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0; /* Square left corners to touch line */
+            margin-bottom: 1.5rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .timeline-card:hover {
+            transform: translateX(10px);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .timeline-date {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-place {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .resume-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        /* --- CERTIFICATIONS SECTION --- */
+        #certifications { padding: 3rem 0; }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3.5rem 2rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card:hover {
+            border-color: #FF9900; 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255, 153, 0, 0.2);
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, #FF9900, transparent);
+            transform: scaleX(0);
+            transition: 0.4s;
+            transform-origin: left;
+        }
+        .cert-card:hover::before { transform: scaleX(1); }
+
+        .cert-icon-wrapper {
+            min-width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .cert-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--text-main);
+        }
+
+        .cert-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+        }
+
         /* --- PROJECTS SECTION --- */
         #projects { padding: 6rem 0; background: rgba(0,0,0,0.2); }
 
@@ -350,7 +476,6 @@
             border: 1px solid var(--border);
             overflow: hidden;
             transition: 0.4s;
-        
         }
 
         .project-card:hover {
@@ -490,7 +615,7 @@
             color: var(--text-muted);
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE & MOBILE MENU REDESIGN (UPDATED) --- */
         @media (max-width: 968px) {
             .hero-wrapper { grid-template-columns: 1fr; text-align: center; }
             .hero-title { font-size: 3rem; }
@@ -498,19 +623,43 @@
             .hero-visual { margin-top: 3rem; display: none; }
             .contact-wrapper { grid-template-columns: 1fr; padding: 2rem; }
             
+            /* NEW SIDEBAR DRAWER DESIGN */
             .nav-menu {
                 position: fixed;
-                top: 0; right: -100%;
-                width: 80%;
+                top: 0; 
+                right: -100%; /* Start hidden off-screen */
+                width: 75%; /* 3/4 width, not full screen */
+                max-width: 300px; /* Limit width on larger tablets */
                 height: 100vh;
-                background: var(--bg-dark);
+                
+                background: rgba(11, 17, 32, 0.95); /* Dark background */
+                backdrop-filter: blur(15px); /* Glass blur */
+                border-left: 1px solid rgba(6, 182, 212, 0.2); /* Subtle cyan border */
+                box-shadow: -10px 0 40px rgba(0,0,0,0.6); /* Shadow for depth */
+                
                 flex-direction: column;
                 justify-content: center;
-                transition: 0.4s;
-                border-left: 1px solid var(--border);
+                align-items: center;
+                gap: 2.5rem;
+                
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth slide */
+                z-index: 999; /* Below the toggle button */
             }
-            .nav-menu.active { right: 0; }
-            .menu-toggle { display: block; z-index: 101; }
+
+            .nav-menu.active { 
+                right: 0; /* Slide in */
+            }
+
+            /* Ensure menu items look good in drawer */
+            .nav-link {
+                font-size: 1.2rem;
+                font-weight: 600;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .menu-toggle { display: block; }
         }
 
         /* Animation Class */
@@ -527,7 +676,6 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav>
         <div class="container nav-container">
             <a href="#" class="logo">
@@ -540,13 +688,13 @@
             <ul class="nav-menu">
                 <li><a href="#hero" class="nav-link active">Home</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Work</a></li>
+                <li><a href="#resume" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Portfolio</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="hero">
         <canvas id="canvas-bg"></canvas>
         <div class="container hero-wrapper">
@@ -591,7 +739,6 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills">
         <div class="container">
             <div class="section-header reveal"> 
@@ -622,25 +769,21 @@
              
             </div>
         </div>
-        
     </section>
 
 
-       <section id="extraskills">
+    <section id="extraskills">
         <div class="container">
             <div class="section-header reveal">
-                <!-- <span class="section-subtitle">MY ARSENAL</span> -->
                 <h2 class="section-title">Backend <span class="text-gradient">Technology</span></h2>
             </div>
 
             <div class="skills-grid">
                 <div class="skill-card reveal">
-                    <!-- <i class="ri-window-fill skill-icon dotnet-icon"></i> -->
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/2048px-.NET_Core_Logo.svg.png" alt="" style="width:80px; height:80px; margin-bottom:10px;">
                     <h3>Asp.Net core</h3>
                 </div>
                 <div class="skill-card reveal">
-                    <!-- <i class="ri-css3-fill skill-icon css-icon"></i> -->
                      <img src="https://www.albiorixtech.com/wp-content/uploads/2022/03/asp-net-mvc-development.png" alt="" style="width:80px; height:80px; margin-bottom:10px;">
                     <h3>MVC</h3>
                 </div>
@@ -655,24 +798,20 @@
                 </div>
             </div>
         </div>
-        
     </section>
 
-    <section id="extraskills">
+    <section id="tools">
         <div class="container">
             <div class="section-header reveal">
-                <!-- <span class="section-subtitle">MY ARSENAL</span> -->
                 <h2 class="section-title">Tools</h2>
             </div>
 
             <div class="skills-grid">
                 <div class="skill-card reveal">
-                    <!-- <i class="ri-window-fill skill-icon dotnet-icon"></i> -->
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Visual_Studio_Icon_2019.svg/2060px-Visual_Studio_Icon_2019.svg.png" alt="visual studio" style="width:80px; height:80px; margin-bottom:10px;">
                     <h3>Visual Studio</h3>
                 </div>
                 <div class="skill-card reveal">
-                    <!-- <i class="ri-css3-fill skill-icon css-icon"></i> -->
                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" alt="vs code" style="width:80px; height:80px; margin-bottom:10px;">
                     <h3>VS Code</h3>
                 </div>
@@ -687,11 +826,74 @@
                 </div>
             </div>
         </div>
-        
     </section>
 
+    <section id="resume">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Education & <span class="text-gradient"> Experience</span></h2>
+            </div>
 
-    <!-- Projects Section -->
+            <div class="resume-grid">
+                
+                <div class="resume-column reveal">
+                    <h3><i class="ri-graduation-cap-fill"></i> Education</h3>
+                    
+                    <div class="timeline-card">
+                        <span class="timeline-date">2023 - 2025</span>
+                        <h4 class="timeline-title">MSC ICT</h4>
+                        <p class="timeline-place">J. P. Dawer Institute of IT & ICT</p>
+                    </div>
+
+                    <div class="timeline-card">
+                        <span class="timeline-date">2020 - 2023</span>
+                        <h4 class="timeline-title">BSC IT</h4>
+                        <p class="timeline-place">P. P. Savani University</p>
+                    </div>
+                </div>
+
+                <div class="resume-column reveal">
+                    <h3><i class="ri-briefcase-fill"></i> Experience</h3>
+
+                    <div class="timeline-card">
+                        <span class="timeline-date">Jan 2025 - June 2025</span>
+                        <h4 class="timeline-title">Jr. Software Developer - Internship</h4>
+                        <p class="timeline-place">Gyrus System</p>
+                    </div>
+
+                    <div class="timeline-card">
+                        <span class="timeline-date">Feb 2024 - June 2024</span>
+                        <h4 class="timeline-title">Web Developer - Internship</h4>
+                        <p class="timeline-place">Swami Infotech</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Certifications <span class="text-gradient">& Licenses</span></h2>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-card reveal">
+                    <div class="cert-icon-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" 
+                             alt="AWS Logo" 
+                             style="width: 100%; height: auto;">
+                    </div>
+                    <div class="cert-content">
+                        <h3>AWS Academy Introduction to Cloud</h3>
+                        <p>Issued by Amazon Web Services (AWS)</p>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </section>
+
     <section id="projects">
         <div class="container">
             <div class="section-header reveal">
@@ -700,11 +902,9 @@
             </div>
 
             <div class="project-grid">
-                <!-- Project 1 -->
                 <div class="project-card reveal">
                     <div class="project-image">
-                        <!-- <i class="ri-shopping-bag-3-line"></i> -->
-                         <img src="https://media.istockphoto.com/id/1408368183/photo/lms-learning-management-system-for-lesson-and-online-education-course-application-study-e.jpg?s=612x612&w=0&k=20&c=ZiEtEhRcVk8EUVM8ZHvZOYwYRjNIeH_-4YN_38aBBx0=" alt="LMS System">
+                         <img src="https://media.istockphoto.com/id/1408368183/photo/lms-learning-management-system-for-lesson-and-online-education-course-application-study-e.jpg?s=612x612&w=0&k=20&c=ZiEtEhRcVk8EUVM8ZHvZOYwYRjNIeH_-4YN_38aBBx0=" alt="LMS System" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div class="project-content">
                         <div class="project-tags">
@@ -712,18 +912,16 @@
                             <span class="tag">.Net Core</span>
                         </div>
                         <h3 class="project-title">Learning Management System</h3>
-                        <p class="project-desc">Mordern LMS System for Student Training and Track Student Activity</p>
+                        <p class="project-desc">Modern LMS System for Student Training and Track Student Activity</p>
                         <div class="project-links">
                             <a href="#" class="link-btn"><i class="ri-github-fill"></i> Code</a> 
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="project-card reveal">
                     <div class="project-image">
-                        <!-- <i class="ri-dashboard-line"></i> -->
-                         <img src="https://t3.ftcdn.net/jpg/01/57/06/36/360_F_157063692_qrDkyZhmIvMqWP2HHJEYeflmmZLMhRbN.jpg" alt="University Event Management">
+                         <img src="https://t3.ftcdn.net/jpg/01/57/06/36/360_F_157063692_qrDkyZhmIvMqWP2HHJEYeflmmZLMhRbN.jpg" alt="University Event Management" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div class="project-content">
                         <div class="project-tags">
@@ -737,18 +935,16 @@
                     </div>
                 </div>
 
-                <!-- Project 3 -->
                 <div class="project-card reveal">
                     <div class="project-image">
-                        <!-- <i class="ri-robot-2-line"></i> -->
-                         <img src="https://www.servcorp.co.uk/media/34561/e-commerce-img.jpeg" alt="E-Commerce Shoes Shop">
+                         <img src="https://www.servcorp.co.uk/media/34561/e-commerce-img.jpeg" alt="E-Commerce Shoes Shop" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">.Net Core MVC</span> 
                         </div>
                         <h3 class="project-title">E-Commerce Shoes Shop</h3>
-                        <p class="project-desc">Build a Responsive E-Ccommerce Website for Online Shoes Shop.</p>
+                        <p class="project-desc">Build a Responsive E-Commerce Website for Online Shoes Shop.</p>
                         <div class="project-links">
                             <a href="#" class="link-btn"><i class="ri-github-fill"></i> Code</a> 
                         </div>
@@ -758,7 +954,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <div class="contact-wrapper reveal">
@@ -805,7 +1000,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>Designed & Built with <i class="ri-heart-fill" style="color: var(--primary)"></i> by Dev Sagar</p>
