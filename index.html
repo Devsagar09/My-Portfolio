@@ -3,799 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Sagar | Software Developer Portfolio</title>
-    
+    <title>DevPortfolio | Next Gen</title>
+
+       <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome (UI Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
 
-    <style>
-        /* --- CSS Variables & Theme Configuration --- */
-        :root {
-            /* Dark Theme (Default) */
-            --primary: #64ffda;
-            --primary-hover: #4cdbc1;
-            --secondary: #8892b0;
-            --text-main: #e6f1ff;
-            --text-muted: #a8b2d1;
-            --bg-body: #0a192f;
-            --bg-nav: rgba(10, 25, 47, 0.85);
-            
-            /* Glassmorphism Variables */
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-blur: 12px;
-            
-            --shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
-            --rain-opacity: 0.1;
-            --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-            --text-glow-dark: 0 0 10px rgba(100, 255, 218, 0.2), 0 0 20px rgba(100, 255, 218, 0.1);
-        }
+    <link rel="stylesheet" href="style.css">
 
-        /* Light Theme Variables */
-        body.light-mode {
-            --primary: #0d9488; /* Teal-700 */
-            --primary-hover: #0f766e;
-            --secondary: #4b5563;
-            --text-main: #111827;
-            --text-muted: #374151;
-            --bg-body: #f3f4f6;
-            --bg-nav: rgba(255, 255, 255, 0.85);
-            
-            /* Glassmorphism Light */
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            
-            --shadow: 0 10px 30px -10px rgba(0,0,0,0.15);
-            --rain-opacity: 0.08;
-            --text-glow-dark: none; /* No glow in light mode */
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
-
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-
-        /* --- Navigation Bar --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 8%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: var(--bg-nav);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
-
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-actions { display: flex; align-items: center; gap: 30px; }
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-
-        .nav-links a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-main);
-            transition: var(--transition);
-            position: relative;
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a::after {
-            content: ''; display: block; width: 0; height: 2px;
-            background: var(--primary); transition: width 0.3s;
-            position: absolute; bottom: -5px;
-        }
-        .nav-links a:hover::after { width: 100%; }
-
-        /* Theme Toggle */
-        .theme-btn {
-            background: transparent; border: 1px solid var(--primary); color: var(--primary);
-            width: 35px; height: 35px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; cursor: pointer;
-            transition: var(--transition);
-        }
-        .theme-btn:hover {
-            background: var(--primary); color: var(--bg-body);
-            transform: rotate(20deg); box-shadow: 0 0 15px var(--primary);
-        }
-
-        /* Hamburger */
-        .hamburger { display: none; cursor: pointer; width: 30px; z-index: 1100; }
-        .hamburger span {
-            display: block; width: 100%; height: 3px; background: var(--primary);
-            margin: 5px 0; transition: 0.4s; border-radius: 3px;
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-
-        /* --- Hero Section --- */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center;
-            justify-content: space-between; padding: 120px 10% 20px;
-            position: relative; overflow: hidden;
-        }
-
-        .hero-content { flex: 1; padding-right: 30px; z-index: 2; }
-        .hero h3 { color: var(--primary); font-size: 1.2rem; margin-bottom: 15px; font-weight: 500; letter-spacing: 1px; }
-        
-        /* H1 - Typing Effect Styling & Glow */
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--text-main);
-            line-height: 1.1;
-            margin-bottom: 15px;
-            /* Neon Text Glow */
-            text-shadow: var(--text-glow-dark);
-        }
-
-        .hero h2 {
-            font-size: 2.5rem; color: var(--text-muted); margin-bottom: 25px;
-        }
-
-        .hero p {
-            max-width: 550px; color: var(--secondary); font-size: 1.1rem;
-            margin-bottom: 40px; line-height: 1.7;
-        }
-
-        /* Typing Cursor Style */
-        .cursor {
-            display: inline-block;
-            margin-left: 5px;
-            font-weight: 300;
-            color: var(--primary);
-            animation: blink 0.75s step-end infinite;
-            transition: opacity 0.5s;
-        }
-
-        @keyframes blink {
-            from, to { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        /* Buttons and Social Links (styles remain the same) */
-        .btn-group { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-bottom: 30px; }
-        .btn {
-            padding: 14px 30px; border-radius: 5px; font-size: 1rem; font-weight: 600;
-            cursor: pointer; transition: var(--transition); display: inline-flex;
-            align-items: center; gap: 10px;
-        }
-        .btn-primary { border: 1px solid var(--primary); color: var(--primary); background: transparent; }
-        .btn-primary:hover { background: rgba(100, 255, 218, 0.1); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .btn-secondary { background: var(--primary); color: var(--bg-body); border: 1px solid var(--primary); }
-        .btn-secondary:hover {
-            background: var(--primary-hover); border-color: var(--primary-hover);
-            transform: translateY(-3px); box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
-        }
-
-        .social-links { display: flex; gap: 25px; font-size: 1.8rem; }
-        .social-links a { color: var(--text-muted); transition: var(--transition); }
-        .social-links a:hover { color: var(--primary); transform: translateY(-3px) scale(1.1); }
-
-        /* Hero Image & Float Animation */
-        .hero-img-wrapper { flex: 0.9; display: flex; justify-content: center; align-items: center; position: relative; z-index: 2; }
-        .profile-3d-img {
-            width: 100%; max-width: 500px; height: auto;
-            filter: drop-shadow(0 20px 30px rgba(100, 255, 218, 0.15));
-            animation: floatProfile 6s ease-in-out infinite;
-        }
-        @keyframes floatProfile {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-25px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Falling Icons (Rain) */
-        .bg-icon {
-            position: absolute; top: -10%; color: var(--text-main);
-            opacity: var(--rain-opacity); z-index: 1; pointer-events: none;
-            user-select: none; animation: fallDown linear infinite;
-        }
-        @keyframes fallDown {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            10% { opacity: var(--rain-opacity); } 
-            90% { opacity: var(--rain-opacity); }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Scroll Down Animation */
-        .scroll-down {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center;
-            color: var(--secondary); animation: bounce 2s infinite;
-        }
-        .mouse {
-            width: 25px; height: 40px; border: 2px solid var(--secondary);
-            border-radius: 20px; position: relative;
-        }
-        .wheel {
-            width: 4px; height: 8px; background: var(--primary);
-            border-radius: 2px; position: absolute; top: 8px;
-            left: 50%; transform: translateX(-50%);
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
-            40% {transform: translateY(-10px) translateX(-50%);}
-            60% {transform: translateY(-5px) translateX(-50%);}
-        }
-
-        /* --- Section General --- */
-        section { padding: 100px 10%; }
-        .section-title {
-            display: flex; align-items: center; margin-bottom: 60px;
-            font-size: 2rem; color: var(--text-main); font-weight: 700;
-        }
-        .section-title::after {
-            content: ""; flex: 1; height: 1px; background: #233554;
-            margin-left: 20px; max-width: 300px;
-        }
-        body.light-mode .section-title::after { background: #d1d5db; }
-        .section-title span { color: var(--primary); margin-right: 10px; font-family: monospace; font-size: 1.5rem; }
-
-        /* --- Skills (Glassmorphism Cards) --- */
-        .skills-wrapper { display: flex; flex-direction: column; gap: 60px; }
-        .skill-category h3 { color: var(--text-main); margin-bottom: 30px; font-size: 1.4rem; text-align: center; position: relative; }
-        .skill-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 35px; }
-
-        /* GLASS CARD CSS */
-        .skill-card {
-            width: 150px; height: 150px; background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border); border-radius: 16px; display: flex;
-            flex-direction: column; justify-content: center; align-items: center;
-            transition: var(--transition); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-            position: relative; overflow: hidden;
-        }
-
-        /* Shine Effect on Hover */
-        .skill-card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
-            transform: skewX(-25deg); transition: 0.5s;
-        }
-        .skill-card:hover::before { left: 100%; }
-        .skill-card:hover {
-            transform: translateY(-10px); border-color: var(--primary);
-            box-shadow: 0 10px 25px rgba(100, 255, 218, 0.15); /* Teal Glow */
-        }
-
-        /* DevIcons in Cards (original color) */
-        .skill-card i {
-            font-size: 4.5rem; margin-bottom: 15px; transition: var(--transition);
-            filter: grayscale(0%);
-        }
-        .skill-card:hover i { transform: scale(1.15) rotate(5deg); }
-        .skill-card span { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; }
-
-        /* --- Experience Timeline --- */
-        .timeline-container { border-left: 2px solid #233554; padding-left: 30px; margin-left: 10px; }
-        body.light-mode .timeline-container { border-left-color: #d1d5db; }
-        .timeline-item { position: relative; margin-bottom: 50px; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -38px; top: 5px;
-            width: 12px; height: 12px; background: var(--bg-body);
-            border: 2px solid var(--primary); border-radius: 50%;
-        }
-        .timeline-item:hover::before { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
-        .timeline-content h3 { color: var(--text-main); font-size: 1.4rem; }
-        .timeline-content h4 { color: var(--primary); font-size: 1rem; margin: 5px 0; font-weight: 600; }
-        .timeline-date { font-family: monospace; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; display: block; }
-        .timeline-desc { color: var(--secondary); font-size: 1rem; }
-
-        /* --- Certificate Glass Card --- */
-        .cert-container { display: flex; justify-content: center; margin-top: 50px; }
-        .glass-card-cert {
-            width: 100%; max-width: 750px; background: var(--glass-bg);
-            backdrop-filter: blur(16px); border: 1px solid var(--glass-border);
-            border-radius: 16px; padding: 45px; display: flex; align-items: center;
-            gap: 30px; box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1); transition: var(--transition);
-            position: relative; overflow: hidden;
-        }
-        .glass-card-cert:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .cert-icon { font-size: 4.5rem; color: #FF9900; }
-        .cert-details h3 { color: var(--text-main); font-size: 1.5rem; margin-bottom: 5px; }
-        .cert-badge { 
-            display: inline-block; margin-top: 12px; padding: 6px 16px;
-            background: rgba(100,255,218,0.1); color: var(--primary);
-            border-radius: 50px; font-size: 0.85rem; border: 1px solid var(--primary);
-        }
-
-        /* --- Projects Section --- */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .project-card {
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            border-radius: 12px; overflow: hidden; transition: var(--transition);
-            height: 100%; display: flex; flex-direction: column; box-shadow: var(--shadow);
-        }
-        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .project-img { width: 100%; height: 220px; overflow: hidden; }
-        .project-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .project-card:hover .project-img img { transform: scale(1.1); }
-        .project-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
-        .project-content h3 { color: var(--text-main); font-size: 1.4rem; margin-bottom: 10px; }
-        .project-content p { color: var(--secondary); font-size: 0.95rem; margin-bottom: 20px; flex: 1; }
-        .tech-list { display: flex; gap: 10px; flex-wrap: wrap; font-family: monospace; font-size: 0.8rem; margin-top: auto; }
-        .tech-list span { color: var(--primary); }
-
-        /* --- Footer / Contact --- */
-        footer {
-            background: linear-gradient(180deg, var(--bg-body) 0%, #020c1b 100%);
-            padding: 80px 10% 30px; text-align: center;
-        }
-        body.light-mode footer { background: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%); }
-        .contact-container {
-            display: flex; flex-wrap: wrap; gap: 50px; justify-content: center;
-            max-width: 1000px; margin: 0 auto 60px; text-align: left;
-        }
-        .contact-left { flex: 1; min-width: 300px; }
-        .contact-left h2 { font-size: 2.5rem; color: var(--text-main); margin-bottom: 20px; }
-        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: var(--text-main); font-size: 1.1rem; }
-        .contact-item i { color: var(--primary); font-size: 1.3rem; width: 25px; }
-
-        .contact-form-wrapper {
-            flex: 1; min-width: 300px; background: var(--glass-bg); padding: 40px;
-            border-radius: 12px; box-shadow: var(--shadow); border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-
-        .form-input {
-            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
-            border-radius: 5px; padding: 15px; color: var(--text-main); font-size: 1rem;
-            transition: var(--transition); outline: none; margin-bottom: 20px;
-        }
-        body.light-mode .form-input { background: #ffffff; border-color: #d1d5db; }
-        textarea.form-input { resize: none; }
-        .form-input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
-        body.light-mode .form-input:focus { background: #ffffff; }
-
-        .submit-btn {
-            width: 100%; padding: 15px; background: transparent; color: var(--primary);
-            border: 1px solid var(--primary); border-radius: 5px; font-size: 1.1rem;
-            cursor: pointer; transition: var(--transition); font-weight: 600; letter-spacing: 1px;
-        }
-        .submit-btn:hover { background: rgba(100, 255, 218, 0.1); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        /* --- Responsive --- */
-        @media (max-width: 968px) {
-            .hero { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
-            .hero h1 { font-size: 3rem; }
-            .hero h2 { font-size: 2rem; }
-            .hero-content { padding-right: 0; margin-top: 40px; }
-            .btn-group { justify-content: center; }
-            .hero p { margin: 0 auto 40px; }
-            .nav-links {
-                position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
-                background: var(--bg-body); flex-direction: column; justify-content: center;
-                transition: 0.5s ease; box-shadow: -10px 0 30px rgba(0,0,0,0.2);
-                border-left: 1px solid var(--glass-border);
-            }
-            .nav-links.nav-active { right: 0; }
-            .hamburger { display: block; }
-            .profile-3d-img { max-width: 350px; }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
-            .hero h2 { font-size: 1.3rem; }
-            section { padding: 60px 5%; }
-            .contact-container { flex-direction: column; gap: 30px; }
-            .contact-form-wrapper { padding: 25px; }
-            .skill-card { width: 130px; height: 130px; }
-            .logo { font-size: 1.3rem; }
-            .nav-actions { gap: 15px; }
-        }
-
-        .devicon-github-original.colored, .devicon-github-original-wordmark.colored, .devicon-github-plain.colored {
-            color: #ffffff;
-        }
-    </style>
+    
 </head>
 <body>
 
     <nav>
-        <div class="logo" data-aos="fade-down">
-           Dev.<span style="color: var(--text-main)">Sagar</span>
-        </div>
-        
-        <div class="nav-actions">
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
-                <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
-                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-            </ul>
-
-            <button class="theme-btn" id="theme-toggle" title="Switch Theme">
-                <i class="fas fa-sun"></i>
-            </button>
-
-            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="ri-code-s-slash-line"></i>
+                <span>DEV<span class="text-gradient">PORTFOLIO</span></span>
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="ri-menu-4-line"></i>
             </div>
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#resume" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content" data-aos="fade-right">
-            <h3>Hi, my name is</h3>
-            <h1>
-                <span id="name-target"></span><span class="cursor" id="cursor-target">|</span>
-            </h1>
-            <h2>I build logic for the web.</h2>
-            <p>
-                I am a Software Developer with hands-on experience in 
-                <span style="color:var(--primary)">.NET Core, Angular, and SQL Server</span>. 
-                I specialize in building robust backend systems and responsive frontend interfaces with modern design principles.
-            </p>
-            
-            <div class="btn-group">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="https://drive.google.com/file/d/1BqWX-dO4h7g6sf8wMOf7MqS08fiu_2kp/view?usp=drivesdk"  class="btn btn-secondary">
-                    <i class="fas fa-download"></i> Download Resume
-                </a>
-            </div>
-
-            <div class="social-links">
-                <a href="https://github.com/Devsagar09"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/dev-sagar-02b9aa250"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:devsagar6080@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-
-        <div class="hero-img-wrapper" data-aos="zoom-in"> <img src="imghero.png" alt="3D Software Developer" class="profile-3d-img">
-        </div>
-        
-        
-    </section>
-
-    <section id="skills">
-        <h2 class="section-title" data-aos="fade-right"> Skills & Tools</h2>
-        
-        <div class="skills-wrapper">
-            
-            <div class="skill-category" data-aos="fade-up">
-                <h3>Backend Technologies</h3>
-                <div class="skill-grid">
-                    <div class="skill-card">
-                        <i class="devicon-dotnetcore-plain colored"></i>
-                        <span>.NET Core</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-csharp-plain colored"></i>
-                        <span>C#</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-nodejs-plain colored"></i>
-                        <span>Node.js</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-microsoftsqlserver-plain colored"></i>
-                        <span>SQL Server</span>
-                    </div>
+    <section id="hero">
+        <canvas id="canvas-bg"></canvas>
+        <div class="container hero-wrapper">
+            <div class="hero-content reveal active">
+                <div class="hero-badge">
+                    <i class="ri-terminal-box-line"></i> Software Developer
+                </div>
+                <h1 class="hero-title">
+                    Building the <br>
+                    <span class="text-gradient">Digital Future</span>
+                </h1>
+                <p class="hero-desc">
+                    I'm a passionate software developer skilled in .NET, Angular, and modern web technologies. I build clean, responsive, and user-friendly applications with a focus on performance and quality.
+                </p>
+                <div class="btn-group">
+                    <a href="https://drive.google.com/file/d/1BqWX-dO4h7g6sf8wMOf7MqS08fiu_2kp/view?usp=drivesdk" class="btn btn-primary">
+                        Resume <i class="ri-arrow-right-line"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        Contact Me <i class="ri-mail-send-line"></i>
+                    </a>
                 </div>
             </div>
-
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                <h3>Frontend Technologies</h3>
-                <div class="skill-grid">
-                    <div class="skill-card">
-                        <i class="devicon-angularjs-plain colored"></i>
-                        <span>Angular</span>
+            
+            <div class="hero-visual reveal">
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
                     </div>
-                    <div class="skill-card">
-                        <i class="devicon-react-original colored"></i>
-                        <span>React</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-javascript-plain colored"></i>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-html5-plain colored"></i>
-                        <span>HTML5</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-css3-plain colored"></i>
-                        <span>CSS3</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                <h3>Tools & Platforms</h3>
-                <div class="skill-grid">
-                    <div class="skill-card">
-                        <i class="devicon-visualstudio-plain colored"></i>
-                        <span>Visual Studio</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-vscode-plain colored"></i>
-                        <span>VS Code</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-github-original colored"></i>
-                        <span>GitHub</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="devicon-figma-plain colored"></i>
-                        <span>Figma</span>
+                    <div class="code-content">
+                        <p><span class="keyword">const</span> <span class="prop">developer</span> = {</p>
+                        <p>&nbsp;&nbsp;name: <span class="string">'Dev Sagar'</span>,</p>
+                        <p>&nbsp;&nbsp;role: <span class="string">'Creative Coder'</span>,</p>
+                        <p>&nbsp;&nbsp;status: <span class="string">'Open to work'</span>,</p>
+                        <p>&nbsp;&nbsp;skills: [<span class="string">'.Net Core'</span>, <span class="string">'MVC'</span>, <span class="string">'Web API'</span>,<span class="string">'Angular'</span>,<span class="string">'Node'</span>]</p>
+                        <p>};</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="experience">
-        <h2 class="section-title" data-aos="fade-right">Experience & Education</h2>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
-            
-            <div>
-                <h3 style="color:var(--text-main); margin-bottom:30px; text-align:center;"><i class="fas fa-briefcase" style="color:var(--primary); margin-right:10px;"></i> Work History</h3>
-                <div class="timeline-container">
-                    <div class="timeline-item" data-aos="fade-left">
-                        <div class="timeline-content">
-                            <h3>Gyrus System</h3>
-                            <h4>Jr. Software Developer - Intern</h4>
-                            <span class="timeline-date">Jan 2025 - June 2025</span>
-                            <p class="timeline-desc">Contributing to full-stack development cycles using .NET and modern frontend frameworks.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
-                        <div class="timeline-content">
-                            <h3>Swami Infotech</h3>
-                            <h4>Web Developer</h4>
-                            <span class="timeline-date">Feb 2024 - June 2024</span>
-                            <p class="timeline-desc">Developed responsive websites and maintained client databases using SQL Server.</p>
-                        </div>
-                    </div>
-                </div>
+    <section id="skills">
+        <div class="container">
+            <div class="section-header reveal"> 
+                <h2 class="section-title">Frontend <span class="text-gradient">Technology</span></h2>
             </div>
 
-            <div>
-                <h3 style="color:var(--text-main); margin-bottom:30px; text-align:center;"><i class="fas fa-graduation-cap" style="color:var(--primary); margin-right:10px;"></i> Education</h3>
-                <div class="timeline-container">
-                    <div class="timeline-item" data-aos="fade-left">
-                        <div class="timeline-content">
-                            <h3>MSc ICT</h3>
-                            <h4>J. P. Dawer Institute of IT & ICT</h4>
-                            <span class="timeline-date">2023 - 2025</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
-                        <div class="timeline-content">
-                            <h3>BSc IT</h3>
-                            <h4>P. P. Savani University</h4>
-                            <span class="timeline-date">2020 - 2023</span>
-                        </div>
-                    </div>
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <i class="ri-html5-fill skill-icon html-icon"></i>
+                    <h3>HTML5</h3>
+                </div>
+                <div class="skill-card reveal">
+                    <i class="ri-css3-fill skill-icon css-icon"></i>
+                    <h3>CSS3</h3>
+                </div>
+                <div class="skill-card reveal">
+                    <i class="ri-javascript-fill skill-icon js-icon"></i>
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="skill-card reveal">
+                    <i class="ri-reactjs-fill skill-icon react-icon"></i>
+                    <h3>React</h3>
+                </div>
+                <div class="skill-card reveal">
+                    <i class="ri-angularjs-fill skill-icon css-icon"></i>
+                    <h3>Angular</h3>
+                </div>
+             
+            </div>
+        </div>
+    </section>
+
+
+    <section id="extraskills">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Backend <span class="text-gradient">Technology</span></h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/2048px-.NET_Core_Logo.svg.png" alt="" style="width:80px; height:80px; margin-bottom:10px;">
+                    <h3>Asp.Net core</h3>
+                </div>
+                <div class="skill-card reveal">
+                     <img src="https://www.albiorixtech.com/wp-content/uploads/2022/03/asp-net-mvc-development.png" alt="" style="width:80px; height:80px; margin-bottom:10px;">
+                    <h3>MVC</h3>
+                </div>
+                <div class="skill-card reveal">
+                      <i class="ri-nodejs-fill skill-icon node-icon"></i>
+                    <h3>Node js</h3>
+                </div>
+                 
+                <div class="skill-card reveal">
+                    <i class="ri-database-2-fill skill-icon db-icon"></i>
+                    <h3>SQL Server</h3>
                 </div>
             </div>
         </div>
+    </section>
 
-        <h3 style="color:var(--text-main); margin:60px 0 30px; text-align:center;">Certifications</h3>
-        <div class="cert-container" data-aos="zoom-in">
-            <div class="glass-card-cert">
-                <div class="cert-icon">
-                    <i class="devicon-amazonwebservices-plain-wordmark colored"></i>
+    <section id="tools">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Tools</h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Visual_Studio_Icon_2019.svg/2060px-Visual_Studio_Icon_2019.svg.png" alt="visual studio" style="width:80px; height:80px; margin-bottom:10px;">
+                    <h3>Visual Studio</h3>
                 </div>
-                <div class="cert-details">
-                    <h3>AWS Academy Introduction to Cloud</h3>
-                    <p>Issued by Amazon Web Services</p>
-                    <span class="cert-badge">Cloud Computing</span>
-                    <span class="cert-badge">Infrastructure</span>
+                <div class="skill-card reveal">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" alt="vs code" style="width:80px; height:80px; margin-bottom:10px;">
+                    <h3>VS Code</h3>
                 </div>
+                <div class="skill-card reveal">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1200px-Octicons-mark-github.svg.png" alt="Github" style="width:80px; height:80px; margin-bottom:10px;">
+                    <h3>Github</h3>
+                </div>
+                 
+                <div class="skill-card reveal">
+                    <img src="https://www.figma.com/community/resource/877724bb-de21-49c5-b59a-48f65c48f210/thumbnail" alt="figma" style="width:60px; height:80px; margin-bottom:10px;">
+                    <h3>Figma</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resume">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Education & <span class="text-gradient"> Experience</span></h2>
+            </div>
+
+            <div class="resume-grid">
+                
+                <div class="resume-column reveal">
+                    <h3><i class="ri-graduation-cap-fill"></i> Education</h3>
+                    
+                    <div class="timeline-card">
+                        <span class="timeline-date">2023 - 2025</span>
+                        <h4 class="timeline-title">MSC ICT</h4>
+                        <p class="timeline-place">J. P. Dawer Institute of IT & ICT</p>
+                    </div>
+
+                    <div class="timeline-card">
+                        <span class="timeline-date">2020 - 2023</span>
+                        <h4 class="timeline-title">BSC IT</h4>
+                        <p class="timeline-place">P. P. Savani University</p>
+                    </div>
+                </div>
+
+                <div class="resume-column reveal">
+                    <h3><i class="ri-briefcase-fill"></i> Experience</h3>
+
+                    <div class="timeline-card">
+                        <span class="timeline-date">Jan 2025 - June 2025</span>
+                        <h4 class="timeline-title">Jr. Software Developer - Internship</h4>
+                        <p class="timeline-place">Gyrus System</p>
+                    </div>
+
+                    <div class="timeline-card">
+                        <span class="timeline-date">Feb 2024 - June 2024</span>
+                        <h4 class="timeline-title">Web Developer - Internship</h4>
+                        <p class="timeline-place">Swami Infotech</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Certifications <span class="text-gradient">& Licenses</span></h2>
+            </div>
+
+            <div class="cert-grid">
+                <div class="cert-card reveal">
+                    <div class="cert-icon-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" 
+                             alt="AWS Logo" 
+                             style="width: 100%; height: auto;">
+                    </div>
+                    <div class="cert-content">
+                        <h3>AWS Academy Introduction to Cloud</h3>
+                        <p>Issued by Amazon Web Services (AWS)</p>
+                    </div>
+                </div> 
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="section-title" data-aos="fade-right"> Featured Projects</h2>
-        
-        <div class="projects-grid">
-            
-            <div class="project-card" data-aos="fade-up">
-                <div class="project-img">
-                    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80
-" alt="LMS Project">
-                </div>
-                <div class="project-content">
-                    <h3>Learning Management System</h3>
-                    <p>A comprehensive platform allowing Admins to manage training modules and students to enroll and track progress.</p>
-                    <div class="tech-list">
-                        <span>.NET Core</span>
-                        <span>Angular</span>
-                        <span>Web API</span>
-                    </div>
-                </div>
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">PORTFOLIO</span>
+                <h2 class="section-title">Featured <span class="text-gradient">Projects</span></h2>
             </div>
 
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="project-img">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Event Management">
+            <div class="project-grid">
+                <div class="project-card reveal">
+                    <div class="project-image">
+                         <img src="https://media.istockphoto.com/id/1408368183/photo/lms-learning-management-system-for-lesson-and-online-education-course-application-study-e.jpg?s=612x612&w=0&k=20&c=ZiEtEhRcVk8EUVM8ZHvZOYwYRjNIeH_-4YN_38aBBx0=" alt="LMS System" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Angular</span>
+                            <span class="tag">.Net Core</span>
+                        </div>
+                        <h3 class="project-title">Learning Management System</h3>
+                        <p class="project-desc">Modern LMS System for Student Training and Track Student Activity</p>
+                        <div class="project-links">
+                            <a href="#" class="link-btn"><i class="ri-github-fill"></i> Code</a> 
+                        </div>
+                    </div>
                 </div>
-                <div class="project-content">
-                    <h3>University Event Management</h3>
-                    <p>A dynamic web application facilitating student participation in hackathons, sports, and cultural events.</p>
-                    <div class="tech-list">
-                        <span>MVC</span>
-                        <span>SQL Server</span>
-                        <span>Bootstrap</span>
+
+                <div class="project-card reveal">
+                    <div class="project-image">
+                         <img src="https://t3.ftcdn.net/jpg/01/57/06/36/360_F_157063692_qrDkyZhmIvMqWP2HHJEYeflmmZLMhRbN.jpg" alt="University Event Management" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">.Net Core MVC</span> 
+                        </div>
+                        <h3 class="project-title">University Event Management</h3>
+                        <p class="project-desc">University Student can easily Participant in events</p>
+                        <div class="project-links">
+                            <a href="#" class="link-btn"><i class="ri-github-fill"></i> Code</a> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image">
+                         <img src="https://www.servcorp.co.uk/media/34561/e-commerce-img.jpeg" alt="E-Commerce Shoes Shop" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">.Net Core MVC</span> 
+                        </div>
+                        <h3 class="project-title">E-Commerce Shoes Shop</h3>
+                        <p class="project-desc">Build a Responsive E-Commerce Website for Online Shoes Shop.</p>
+                        <div class="project-links">
+                            <a href="#" class="link-btn"><i class="ri-github-fill"></i> Code</a> 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact">
-        <h2 class="section-title" style="justify-content: center; margin-bottom: 60px;" data-aos="fade-down">Get In Touch</h2>
+    <section id="contact">
+        <div class="container">
+            <div class="contact-wrapper reveal">
+                <div class="contact-info">
+                    <span class="section-subtitle">GET IN TOUCH</span>
+                    <h3>Let's build something <br> <span class="text-gradient">amazing together.</span></h3>
+                    <p class="hero-desc">
+                        Have a project in mind? Looking to hire? Or just want to chat about tech? 
+                        Drop me a message!
+                    </p>
+                    
+                    <!-- <div class="contact-item">
+                        <div class="icon-box"><i class="ri-mail-send-line"></i></div>
+                        <div>
+                            <h4>Email Me</h4>
+                            <p class="text-muted">devsagar6080@gmail.com</p>
+                        </div>
+                    </div>
 
-        <div class="contact-container">
-            <div class="contact-left" data-aos="fade-right">
-                <h2>Let's Chat!</h2>
-                <p>I am currently open to new opportunities. If you have a question or just want to say hi, drop me a message!</p>
-                
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>devsagar6080@gmail.com</span>
+                    <div class="contact-item">
+                        <div class="icon-box"><i class="ri-map-pin-line"></i></div>
+                        <div>
+                            <h4>Location</h4>
+                            <p class="text-muted">Surat</p>
+                        </div>
+                    </div> -->
+                    <div class="social-links">
+                        <a href="https://github.com/Devsagar09"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/dev-sagar-02b9aa250"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:devsagar6080@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    <span>linkedin.com/in/dev-sagar</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Surat, Gujarat, India</span>
-                </div>
-            </div>
 
-            <div class="contact-form-wrapper" data-aos="fade-left" >
-                <form action="https://formsubmit.co/devsagar6080@gmail.com" method="post">
-                    <input type="text" class="form-input" placeholder="Your Name" required>
-                    <input type="email" class="form-input" placeholder="Your Email" required>
-                    <textarea rows="4" class="form-input" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane" style="margin-left:5px;"></i></button>
+                <form class="contact-form" action="https://formsubmit.co/devsagar6080@gmail.com" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Your Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Your Email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input" rows="5" placeholder="Your Message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        Send Message <i class="ri-send-plane-fill"></i>
+                    </button>
                 </form>
             </div>
         </div>
+    </section>
 
-        <div style="color: var(--secondary); font-size: 0.9rem;">
-            <p>&copy; 2025 Dev Sagar</p>
+    <footer>
+        <div class="container">
+            <p>Designed & Built by <b> Dev Sagar </b></p> 
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize Animations
-        AOS.init({ duration: 800, once: true, mirror: false });
+    
 
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const navLinks = document.getElementById('nav-links');
-            const hamburger = document.getElementById('hamburger');
-            navLinks.classList.toggle('nav-active');
-            hamburger.classList.toggle('active');
-        }
-
-        // --- Typing Effect Logic ---
-        function typeWriter(elementId, text, speed) {
-            const element = document.getElementById(elementId);
-            const cursor = document.getElementById('cursor-target');
-            let i = 0;
-            
-            element.innerHTML = ''; // Clear content for typing
-            cursor.style.visibility = 'visible'; // Ensure cursor is visible
-
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    // Stop blinking effect after 3 seconds for a clean look, or let it run
-                    // setTimeout(() => { cursor.style.display = 'none'; }, 3000);
-                }
-            }
-            type();
-        }
-
-
-        // --- Theme Toggle Logic ---
-        const themeBtn = document.getElementById('theme-toggle');
-        const themeIcon = themeBtn.querySelector('i');
-        const body = document.body;
-
-        themeBtn.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            
-            if(body.classList.contains('light-mode')) {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            } else {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            }
-        });
-
-        // --- Falling "Matrix/Rain" Icons Logic ---
-        function createFallingIcons() {
-            const heroSection = document.getElementById('home');
-            const iconClasses = [
-                'devicon-dotnetcore-plain',
-                'devicon-csharp-plain',
-                'devicon-angularjs-plain',
-                'devicon-react-original',
-                'devicon-javascript-plain',
-                'devicon-html5-plain',
-                'devicon-css3-plain',
-                'devicon-microsoftsqlserver-plain',
-                'devicon-github-original',
-                'devicon-visualstudio-plain'
-            ];
-
-            for (let i = 0; i < 20; i++) {
-                const icon = document.createElement('i');
-                const randomClass = iconClasses[Math.floor(Math.random() * iconClasses.length)];
-                
-                icon.classList.add('bg-icon');
-                icon.classList.add(randomClass);
-
-                icon.style.left = Math.random() * 95 + '%';
-
-                const size = Math.random() * 30 + 20 + 'px';
-                icon.style.fontSize = size;
-
-                const duration = Math.random() * 6 + 4 + 's';
-                icon.style.animationDuration = duration;
-
-                icon.style.animationDelay = (Math.random() * -10) + 's';
-
-                heroSection.appendChild(icon);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            createFallingIcons();
-            // Start the typing effect on the name
-            typeWriter('name-target', 'Dev Sagar', 120); 
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
